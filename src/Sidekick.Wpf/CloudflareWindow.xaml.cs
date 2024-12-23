@@ -67,25 +67,78 @@ public partial class CloudflareWindow
 
     private async void CoreWebView2_NavigationCompleted(object? sender, CoreWebView2NavigationCompletedEventArgs e)
     {
+        var cookies = await GetCookies();
+        if (cookies == null)
+        {
+            return;
+        }
+
+        logger.LogInformation("[CloudflareWindow] Cookie check completed, challenge likely completed");
+        // Store the Cloudflare cookie
+        _ = cloudflareService.CaptchaChallengeCompleted(cookies);
+        challengeCompleted = true;
+
+        Dispatcher.Invoke(Close);
+    }
+
+    private async Task<Dictionary<string, string>?> GetCookies()
+    {
         try
         {
             var cookies = await WebView.CoreWebView2.CookieManager.GetCookiesAsync(uri.GetLeftPart(UriPartial.Authority));
             var cfCookie = cookies.FirstOrDefault(c => c.Name == "cf_clearance");
-            if (cfCookie == null)
+            if (cfCookie != null)
             {
-                return;
+                return cookies.ToDictionary(c => c.Name, c => c.Value);
             }
-
-            // Store the Cloudflare cookie
-            challengeCompleted = true;
-            _ = cloudflareService.CaptchaChallengeCompleted(cookies.ToDictionary(c => c.Name, c => c.Value));
-            logger.LogInformation("[CloudflareWindow] Cookie check completed, challenge likely completed");
-
-            Dispatcher.Invoke(Close);
         }
         catch (Exception ex)
         {
             logger.LogError(ex, "[CloudflareWindow] Error handling cookie check");
         }
+
+        return null;
+    }
+
+    private async Task<string?> GetContents()
+    {
+        try
+        {
+            // Inject and execute JavaScript to get the raw content of the page
+            var script = @"
+            (function() {
+                return document.documentElement.innerText; // Returns the raw content of the page
+            })();";
+
+            // Execute the script and get the response as a string
+            var rawContent = await WebView.CoreWebView2.ExecuteScriptAsync(script);
+
+            if (!string.IsNullOrEmpty(rawContent))
+            {
+                // Clean up the response (escaping and unescaping)
+                rawContent = rawContent.Trim('"').Replace("\\n", "\n").Replace("\\\"", "\"").Replace("\\t", "\t");
+
+                // Log or process the content (assuming it's JSON or text-based)
+                logger.LogInformation("[CloudflareWindow] Retrieved API response: {rawContent}", rawContent.Substring(0, 10000));
+
+                // If it's JSON you can parse it
+                // var jsonObject = JsonSerializer.Deserialize<YourType>(rawContent);
+            }
+            else
+            {
+                logger.LogWarning("[CloudflareWindow] No content available from the WebView.");
+            }
+
+            // Handle content or move to the next step
+            // Example: signal success or close window
+            challengeCompleted = true;
+            Dispatcher.Invoke(Close);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "[CloudflareWindow] Error while retrieving content of the WebView.");
+        }
+
+        return null;
     }
 }
