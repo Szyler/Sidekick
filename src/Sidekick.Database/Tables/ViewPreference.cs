@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Sidekick.Common.Database.Tables;
+namespace Sidekick.Database.Tables;
 
 public class ViewPreference
 {

@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Sidekick.Common.Database.Migrations
+namespace Sidekick.Database.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration

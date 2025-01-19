@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Sidekick.Common.Database.Tables
+namespace Sidekick.Database.Tables
 {
     [PrimaryKey(nameof(Date), nameof(StashId))]
     public class WealthStashSnapshot

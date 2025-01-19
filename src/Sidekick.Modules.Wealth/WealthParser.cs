@@ -5,8 +5,8 @@ using Sidekick.Apis.Poe.Clients.Exceptions;
 using Sidekick.Apis.Poe.Stash;
 using Sidekick.Apis.Poe.Stash.Models;
 using Sidekick.Apis.PoeNinja;
-using Sidekick.Common.Database;
-using Sidekick.Common.Database.Tables;
+using Sidekick.Database;
+using Sidekick.Database.Tables;
 using Sidekick.Common.Game.Items;
 using Sidekick.Common.Settings;
 

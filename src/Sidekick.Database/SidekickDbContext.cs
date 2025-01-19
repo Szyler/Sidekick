@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using Sidekick.Common.Database.Converters;
-using Sidekick.Common.Database.Tables;
+using Sidekick.Database.Converters;
+using Sidekick.Database.Tables;
 
-namespace Sidekick.Common.Database;
+namespace Sidekick.Database;
 
 public class SidekickDbContext : DbContext
 {

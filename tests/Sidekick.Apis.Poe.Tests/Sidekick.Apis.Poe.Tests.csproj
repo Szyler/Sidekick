@@ -31,6 +31,7 @@
     <ProjectReference Include="..\..\src\Sidekick.Apis.PoeNinja\Sidekick.Apis.PoeNinja.csproj" />
     <ProjectReference Include="..\..\src\Sidekick.Apis.PoeWiki\Sidekick.Apis.PoeWiki.csproj" />
     <ProjectReference Include="..\..\src\Sidekick.Common\Sidekick.Common.csproj" />
+    <ProjectReference Include="..\..\src\Sidekick.Database.Native\Sidekick.Database.Native.csproj" />
     <ProjectReference Include="..\..\src\Sidekick.Mock\Sidekick.Mock.csproj" />
   </ItemGroup>
 

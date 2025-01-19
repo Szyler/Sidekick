@@ -6,8 +6,17 @@ namespace Sidekick.Common.Updater;
 public class AutoUpdater(
     ILogger<AutoUpdater> logger) : IAutoUpdater
 {
+    private bool Enabled { get; set; }
+
+    public void EnableAutoUpdates()
+    {
+        Enabled = true;
+    }
+
     public async Task CheckForUpdates()
     {
+        if (!Enabled) return;
+
         var source = new Velopack.Sources.GithubSource("https://github.com/Sidekick-Poe/Sidekick", null, true);
         var updateManager = new UpdateManager(source, logger: logger);
 

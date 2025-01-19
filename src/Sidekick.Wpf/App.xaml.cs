@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Interop;
@@ -14,12 +13,12 @@ using Sidekick.Apis.PoeWiki;
 using Sidekick.Common.Updater;
 using Sidekick.Common;
 using Sidekick.Common.Blazor;
-using Sidekick.Common.Database;
 using Sidekick.Common.Platform;
 using Sidekick.Common.Platform.Interprocess;
 using Sidekick.Common.Settings;
 using Sidekick.Common.Ui;
 using Sidekick.Common.Ui.Views;
+using Sidekick.Database.Native;
 using Sidekick.Mock;
 using Sidekick.Modules.Chat;
 using Sidekick.Modules.Development;
@@ -52,6 +51,9 @@ namespace Sidekick.Wpf
             logger = ServiceProvider.GetRequiredService<ILogger<App>>();
             settingsService = ServiceProvider.GetRequiredService<ISettingsService>();
             interprocessService = ServiceProvider.GetRequiredService<IInterprocessService>();
+
+            var autoUpdater = ServiceProvider.GetRequiredService<IAutoUpdater>();
+            autoUpdater.EnableAutoUpdates();
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -131,7 +133,7 @@ namespace Sidekick.Wpf
                 // Common
                 .AddSidekickCommon()
                 .AddSidekickCommonBlazor()
-                .AddSidekickCommonDatabase(SidekickPaths.DatabasePath)
+                .AddSidekickDatabase(SidekickPaths.DatabasePath)
                 .AddSidekickCommonUi()
                 .AddSidekickCommonPlatform(o =>
                 {
