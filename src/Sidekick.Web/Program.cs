@@ -35,7 +35,7 @@ builder.Services
     // Common
     .AddSidekickCommon()
     .AddSidekickCommonBlazor()
-    .AddSidekickDatabase(SidekickPaths.DatabasePath)
+    .AddSidekickDatabaseNative(SidekickPaths.DatabasePath)
     .AddSidekickCommonUi()
     .AddSingleton<IInterprocessService, InterprocessService>()
 

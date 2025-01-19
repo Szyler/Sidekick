@@ -133,7 +133,7 @@ namespace Sidekick.Wpf
                 // Common
                 .AddSidekickCommon()
                 .AddSidekickCommonBlazor()
-                .AddSidekickDatabase(SidekickPaths.DatabasePath)
+                .AddSidekickDatabaseNative(SidekickPaths.DatabasePath)
                 .AddSidekickCommonUi()
                 .AddSidekickCommonPlatform(o =>
                 {

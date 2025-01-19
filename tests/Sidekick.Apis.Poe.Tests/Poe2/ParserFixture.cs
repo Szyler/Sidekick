@@ -36,7 +36,7 @@ namespace Sidekick.Apis.Poe.Tests.Poe2
             ctx.Services
                 // Building blocks
                 .AddSidekickCommon()
-                .AddSidekickDatabase(SidekickPaths.DatabasePath)
+                .AddSidekickDatabaseNative(SidekickPaths.DatabasePath)
 
                 // Apis
                 .AddSidekickPoeApi()

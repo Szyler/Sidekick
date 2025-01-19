@@ -8,6 +8,8 @@ namespace Sidekick.Common;
 /// </summary>
 public class SidekickConfiguration
 {
+    public bool IsWasm { get; set; }
+
     /// <summary>
     ///     Gets or sets a list of initializable services.
     /// </summary>
