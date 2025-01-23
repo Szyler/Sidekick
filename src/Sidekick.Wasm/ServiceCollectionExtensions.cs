@@ -1,13 +1,15 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+using Sidekick.Common.Database;
+using SqliteWasmHelper;
 
-namespace Sidekick.Database.Wasm;
+namespace Sidekick.Wasm;
 
 public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddSidekickDatabaseWasm(this IServiceCollection services)
     {
-        services.AddDbContextFactory<SidekickDbContext>(options => options.UseSqlite("Filename=Sidekick.db"));
+        services.AddSqliteWasmDbContextFactory<SidekickDbContext>(
+            opts => opts.UseSqlite("Data Source=Sidekick.sqlite3"));
 
         return services;
     }

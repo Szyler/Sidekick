@@ -2,8 +2,8 @@ using System.Globalization;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Sidekick.Database;
-using Sidekick.Database.Tables;
+using Sidekick.Common.Database;
+using Sidekick.Common.Database.Tables;
 using Sidekick.Common.Enums;
 
 namespace Sidekick.Common.Settings

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Sidekick.Database;
-using Sidekick.Database.Tables;
+using Sidekick.Common.Database;
+using Sidekick.Common.Database.Tables;
 using Sidekick.Common.Settings;
 
 namespace Sidekick.Common.Ui.Views;

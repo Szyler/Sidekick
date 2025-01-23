@@ -49,9 +49,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Sidekick.Common.Native\Sidekick.Common.Native.csproj" />
     <ProjectReference Include="..\Sidekick.Common.Updater\Sidekick.Common.Updater.csproj" />
     <ProjectReference Include="..\Sidekick.Common.Platform\Sidekick.Common.Platform.csproj" />
-    <ProjectReference Include="..\Sidekick.Database.Native\Sidekick.Database.Native.csproj" />
     <ProjectReference Include="..\Sidekick.Mock\Sidekick.Mock.csproj" />
     <ProjectReference Include="..\Sidekick.Modules.Chat\Sidekick.Modules.Chat.csproj" />
     <ProjectReference Include="..\Sidekick.Modules.Development\Sidekick.Modules.Development.csproj" />

@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Sidekick.Database.Converters
+namespace Sidekick.Common.Database.Converters
 {
     /// <summary>
     ///     Converts <see cref="DateTimeOffset" /> to and from a long representing UTC DateTime ticks.

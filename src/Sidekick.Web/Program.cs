@@ -7,11 +7,11 @@ using Sidekick.Apis.PoeWiki;
 using Sidekick.Common.Updater;
 using Sidekick.Common;
 using Sidekick.Common.Blazor;
+using Sidekick.Common.Native;
 using Sidekick.Common.Platform;
 using Sidekick.Common.Platform.Interprocess;
 using Sidekick.Common.Ui;
 using Sidekick.Common.Ui.Views;
-using Sidekick.Database.Native;
 using Sidekick.Mock;
 using Sidekick.Modules.Chat;
 using Sidekick.Modules.Development;
@@ -35,7 +35,7 @@ builder.Services
     // Common
     .AddSidekickCommon()
     .AddSidekickCommonBlazor()
-    .AddSidekickDatabaseNative(SidekickPaths.DatabasePath)
+    .AddSidekickCommonNative(SidekickPaths.DatabasePath)
     .AddSidekickCommonUi()
     .AddSingleton<IInterprocessService, InterprocessService>()
 

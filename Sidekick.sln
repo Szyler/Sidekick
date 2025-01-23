@@ -66,7 +66,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sidekick.Modules.Wealth", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sidekick.Protocol", "src\Sidekick.Protocol\Sidekick.Protocol.csproj", "{0CA1B097-80C0-4E67-8372-AF2041D7C4CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sidekick.Database", "src\Sidekick.Database\Sidekick.Database.csproj", "{8C9915FA-EC66-47AA-B449-4833813B0D16}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sidekick.Common.Database", "src\Sidekick.Common.Database\Sidekick.Common.Database.csproj", "{8C9915FA-EC66-47AA-B449-4833813B0D16}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sidekick.Common.Ui", "src\Sidekick.Common.Ui\Sidekick.Common.Ui.csproj", "{F5B003D8-BE39-419A-A02A-4328A4FBDD10}"
 EndProject
@@ -74,11 +74,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sidekick.Common.Updater", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sidekick.Wasm", "src\Sidekick.Wasm\Sidekick.Wasm.csproj", "{01D02209-314B-4AEE-BE84-E7FB8E5BA633}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{B9440D58-4F1E-4481-9F4A-16207A842F3A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sidekick.Database.Wasm", "src\Sidekick.Database.Wasm\Sidekick.Database.Wasm.csproj", "{52AA5181-C818-4D3D-900A-17EDC6E975BE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sidekick.Database.Native", "src\Sidekick.Database.Native\Sidekick.Database.Native.csproj", "{EC2AF50D-A009-481A-A7E0-9E82D94EE0D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sidekick.Common.Native", "src\Sidekick.Common.Native\Sidekick.Common.Native.csproj", "{080E0BC9-A399-4177-882A-60C5B6A1E202}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -178,14 +174,10 @@ Global
 		{01D02209-314B-4AEE-BE84-E7FB8E5BA633}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01D02209-314B-4AEE-BE84-E7FB8E5BA633}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01D02209-314B-4AEE-BE84-E7FB8E5BA633}.Release|Any CPU.Build.0 = Release|Any CPU
-		{52AA5181-C818-4D3D-900A-17EDC6E975BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{52AA5181-C818-4D3D-900A-17EDC6E975BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{52AA5181-C818-4D3D-900A-17EDC6E975BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{52AA5181-C818-4D3D-900A-17EDC6E975BE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EC2AF50D-A009-481A-A7E0-9E82D94EE0D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC2AF50D-A009-481A-A7E0-9E82D94EE0D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC2AF50D-A009-481A-A7E0-9E82D94EE0D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC2AF50D-A009-481A-A7E0-9E82D94EE0D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{080E0BC9-A399-4177-882A-60C5B6A1E202}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{080E0BC9-A399-4177-882A-60C5B6A1E202}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{080E0BC9-A399-4177-882A-60C5B6A1E202}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{080E0BC9-A399-4177-882A-60C5B6A1E202}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -209,9 +201,8 @@ Global
 		{70B9893F-72F8-4B5F-A9CF-732E538D6C9E} = {BB6816F5-1413-4545-96FA-D31D2D9BF6B1}
 		{F5B003D8-BE39-419A-A02A-4328A4FBDD10} = {E4920CFB-0EED-44B1-AC8D-8F5ECBCB7788}
 		{2F2F03B3-213A-40D7-B818-8E618DDF01AF} = {E4920CFB-0EED-44B1-AC8D-8F5ECBCB7788}
-		{8C9915FA-EC66-47AA-B449-4833813B0D16} = {B9440D58-4F1E-4481-9F4A-16207A842F3A}
-		{52AA5181-C818-4D3D-900A-17EDC6E975BE} = {B9440D58-4F1E-4481-9F4A-16207A842F3A}
-		{EC2AF50D-A009-481A-A7E0-9E82D94EE0D3} = {B9440D58-4F1E-4481-9F4A-16207A842F3A}
+		{080E0BC9-A399-4177-882A-60C5B6A1E202} = {E4920CFB-0EED-44B1-AC8D-8F5ECBCB7788}
+		{8C9915FA-EC66-47AA-B449-4833813B0D16} = {E4920CFB-0EED-44B1-AC8D-8F5ECBCB7788}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {17B5631D-95B3-4007-BE6B-C9BBE799D014}

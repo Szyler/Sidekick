@@ -4,23 +4,23 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Sidekick.Database;
+using Sidekick.Common.Database;
 
 #nullable disable
 
-namespace Sidekick.Database.Migrations
+namespace Sidekick.Common.Database.Migrations
 {
     [DbContext(typeof(SidekickDbContext))]
-    [Migration("20241220162035_AddViewPreference")]
-    partial class AddViewPreference
+    [Migration("20240706020559_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.11");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.6");
 
-            modelBuilder.Entity("Sidekick.Database.Tables.Setting", b =>
+            modelBuilder.Entity("Sidekick.Common.Database.Tables.Setting", b =>
                 {
                     b.Property<string>("Key")
                         .HasMaxLength(64)
@@ -35,24 +35,7 @@ namespace Sidekick.Database.Migrations
                     b.ToTable("Settings");
                 });
 
-            modelBuilder.Entity("Sidekick.Database.Tables.ViewPreference", b =>
-                {
-                    b.Property<string>("Key")
-                        .HasMaxLength(64)
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("Height")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("Width")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Key");
-
-                    b.ToTable("ViewPreferences");
-                });
-
-            modelBuilder.Entity("Sidekick.Database.Tables.WealthFullSnapshot", b =>
+            modelBuilder.Entity("Sidekick.Common.Database.Tables.WealthFullSnapshot", b =>
                 {
                     b.Property<long>("Date")
                         .HasColumnType("INTEGER");
@@ -62,15 +45,15 @@ namespace Sidekick.Database.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Total")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Total")
+                        .HasColumnType("REAL");
 
                     b.HasKey("Date");
 
                     b.ToTable("WealthFullSnapshots");
                 });
 
-            modelBuilder.Entity("Sidekick.Database.Tables.WealthItem", b =>
+            modelBuilder.Entity("Sidekick.Common.Database.Tables.WealthItem", b =>
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(64)
@@ -110,23 +93,23 @@ namespace Sidekick.Database.Migrations
                         .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Price")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("StashId")
                         .IsRequired()
                         .HasMaxLength(64)
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Total")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Total")
+                        .HasColumnType("REAL");
 
                     b.HasKey("Id");
 
                     b.ToTable("WealthItems");
                 });
 
-            modelBuilder.Entity("Sidekick.Database.Tables.WealthStash", b =>
+            modelBuilder.Entity("Sidekick.Common.Database.Tables.WealthStash", b =>
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(64)
@@ -149,8 +132,8 @@ namespace Sidekick.Database.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Total")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Total")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -162,7 +145,7 @@ namespace Sidekick.Database.Migrations
                     b.ToTable("WealthStashes");
                 });
 
-            modelBuilder.Entity("Sidekick.Database.Tables.WealthStashSnapshot", b =>
+            modelBuilder.Entity("Sidekick.Common.Database.Tables.WealthStashSnapshot", b =>
                 {
                     b.Property<long>("Date")
                         .HasColumnType("INTEGER");
@@ -176,8 +159,8 @@ namespace Sidekick.Database.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Total")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Total")
+                        .HasColumnType("REAL");
 
                     b.HasKey("Date", "StashId");
 

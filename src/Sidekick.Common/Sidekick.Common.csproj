@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sidekick.Database\Sidekick.Database.csproj" />
+    <ProjectReference Include="..\Sidekick.Common.Database\Sidekick.Common.Database.csproj" />
   </ItemGroup>
 
 </Project>

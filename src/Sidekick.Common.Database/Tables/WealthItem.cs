@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Sidekick.Database.Tables
+namespace Sidekick.Common.Database.Tables
 {
     public class WealthItem
     {

@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Sidekick.Database;
+using Sidekick.Common.Database;
 
 #nullable disable
 
-namespace Sidekick.Database.Migrations
+namespace Sidekick.Common.Database.Migrations
 {
     [DbContext(typeof(SidekickDbContext))]
     [Migration("20241226161905_SaveWindowPositions")]
@@ -20,7 +20,7 @@ namespace Sidekick.Database.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.11");
 
-            modelBuilder.Entity("Sidekick.Database.Tables.Setting", b =>
+            modelBuilder.Entity("Sidekick.Common.Database.Tables.Setting", b =>
                 {
                     b.Property<string>("Key")
                         .HasMaxLength(64)
@@ -35,7 +35,7 @@ namespace Sidekick.Database.Migrations
                     b.ToTable("Settings");
                 });
 
-            modelBuilder.Entity("Sidekick.Database.Tables.ViewPreference", b =>
+            modelBuilder.Entity("Sidekick.Common.Database.Tables.ViewPreference", b =>
                 {
                     b.Property<string>("Key")
                         .HasMaxLength(64)
@@ -58,7 +58,7 @@ namespace Sidekick.Database.Migrations
                     b.ToTable("ViewPreferences");
                 });
 
-            modelBuilder.Entity("Sidekick.Database.Tables.WealthFullSnapshot", b =>
+            modelBuilder.Entity("Sidekick.Common.Database.Tables.WealthFullSnapshot", b =>
                 {
                     b.Property<long>("Date")
                         .HasColumnType("INTEGER");
@@ -76,7 +76,7 @@ namespace Sidekick.Database.Migrations
                     b.ToTable("WealthFullSnapshots");
                 });
 
-            modelBuilder.Entity("Sidekick.Database.Tables.WealthItem", b =>
+            modelBuilder.Entity("Sidekick.Common.Database.Tables.WealthItem", b =>
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(64)
@@ -132,7 +132,7 @@ namespace Sidekick.Database.Migrations
                     b.ToTable("WealthItems");
                 });
 
-            modelBuilder.Entity("Sidekick.Database.Tables.WealthStash", b =>
+            modelBuilder.Entity("Sidekick.Common.Database.Tables.WealthStash", b =>
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(64)
@@ -168,7 +168,7 @@ namespace Sidekick.Database.Migrations
                     b.ToTable("WealthStashes");
                 });
 
-            modelBuilder.Entity("Sidekick.Database.Tables.WealthStashSnapshot", b =>
+            modelBuilder.Entity("Sidekick.Common.Database.Tables.WealthStashSnapshot", b =>
                 {
                     b.Property<long>("Date")
                         .HasColumnType("INTEGER");

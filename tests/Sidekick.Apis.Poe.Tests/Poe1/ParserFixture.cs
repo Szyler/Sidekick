@@ -8,8 +8,8 @@ using Sidekick.Apis.PoeWiki;
 using Sidekick.Common;
 using Sidekick.Common.Cache;
 using Sidekick.Common.Initialization;
+using Sidekick.Common.Native;
 using Sidekick.Common.Settings;
-using Sidekick.Database.Native;
 using Sidekick.Mock;
 using Xunit;
 
@@ -36,7 +36,7 @@ namespace Sidekick.Apis.Poe.Tests.Poe1
             ctx.Services
                 // Building blocks
                 .AddSidekickCommon()
-                .AddSidekickDatabaseNative(SidekickPaths.DatabasePath)
+                .AddSidekickCommonNative(SidekickPaths.DatabasePath)
 
                 // Apis
                 .AddSidekickPoeApi()

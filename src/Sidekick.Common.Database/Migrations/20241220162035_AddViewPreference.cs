@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Sidekick.Database.Migrations
+namespace Sidekick.Common.Database.Migrations
 {
     /// <inheritdoc />
     public partial class AddViewPreference : Migration
