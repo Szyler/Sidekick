@@ -20,7 +20,7 @@
     }
 </div>
 
-@inject DbContextOptions<SidekickDbContext> DbContextOptions
+@inject ISidekickDatabaseFactory DatabaseFactory
 @inject WealthParser WealthParser
 @implements IDisposable
 
@@ -112,8 +112,8 @@
 
     private async Task LoadData()
     {
-        await using var database = new SidekickDbContext(DbContextOptions);
-        Stashes = await database
+        await using var dbContext = await DatabaseFactory.Create();
+        Stashes = await dbContext
                         .WealthStashes.Where(x => View.SelectedStashIds.Contains(x.Id))
                         .OrderByDescending(x => x.Total)
                         .ToListAsync();

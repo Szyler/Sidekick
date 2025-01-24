@@ -18,6 +18,7 @@ using Sidekick.Modules.General;
 using Sidekick.Modules.Maps;
 using Sidekick.Modules.Trade;
 using Sidekick.Modules.Wealth;
+using Sidekick.Wasm;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<Sidekick.Common.Blazor.Main>("#app");
@@ -32,7 +33,7 @@ builder.Services
     // Common
     .AddSidekickCommon()
     .AddSidekickCommonBlazor()
-    // .AddSidekickDatabase(SidekickPaths.DatabasePath)
+    .AddSidekickDatabaseWasm()
     .AddSidekickCommonUi()
     .AddSingleton<IInterprocessService, InterprocessService>()
 

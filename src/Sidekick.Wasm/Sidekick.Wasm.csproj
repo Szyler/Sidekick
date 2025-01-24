@@ -47,10 +47,6 @@
     <_ContentIncludedByDefault Remove="Components\WasmDatabase.razor" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
   <Target Name="Copywwwroot" BeforeTargets="Build">
     <ItemGroup>
       <WwwRootFiles Include="$(ProjectDir)..\Sidekick.Common.Ui\wwwroot\**\*.*"/>

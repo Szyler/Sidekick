@@ -7,7 +7,7 @@ namespace Sidekick.Common.Ui.Views;
 
 public class ViewPreferenceService
 (
-    DbContextOptions<SidekickDbContext> dbOptions,
+    ISidekickDatabaseFactory databaseFactory,
     ISettingsService settingsService
 ) : IViewPreferenceService
 {
@@ -18,7 +18,7 @@ public class ViewPreferenceService
             return null;
         }
 
-        var dbContext = new SidekickDbContext(dbOptions);
+        await using var dbContext = await databaseFactory.Create();
         var viewPreference = await dbContext.ViewPreferences.FirstOrDefaultAsync(x => x.Key == key);
         return viewPreference;
     }
@@ -37,7 +37,7 @@ public class ViewPreferenceService
             y = null;
         }
 
-        var dbContext = new SidekickDbContext(dbOptions);
+        await using var dbContext = await databaseFactory.Create();
         var viewPreference = await dbContext.ViewPreferences.FirstOrDefaultAsync(preference => preference.Key == key);
         if (viewPreference == null)
         {

@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Sidekick.Apis.Poe.Clients;
 using Sidekick.Apis.Poe.Clients.Exceptions;
 using Sidekick.Apis.Poe.Stash;
 using Sidekick.Apis.Poe.Stash.Models;
@@ -13,7 +12,7 @@ using Sidekick.Common.Settings;
 namespace Sidekick.Modules.Wealth
 {
     internal class WealthParser(
-        DbContextOptions<SidekickDbContext> dbContextOptions,
+        ISidekickDatabaseFactory databaseFactory,
         ISettingsService settingsService,
         IStashService stashService,
         IPoeNinjaClient poeNinjaClient,
@@ -77,7 +76,7 @@ namespace Sidekick.Modules.Wealth
             {
                 try
                 {
-                    await using var database = new SidekickDbContext(dbContextOptions);
+                    await using var dbContext = await databaseFactory.Create();
                     var tabs = await settingsService.GetString(SettingKeys.WealthTrackedTabs);
 
                     foreach (var id in tabs?.Split(',') ?? [])
@@ -94,8 +93,8 @@ namespace Sidekick.Modules.Wealth
                         }
 
                         Log("Icons.Material.Filled.HourglassTop", "Color.Info", $"[{stash.Name}] Updating...");
-                        await ParseStash(database, stash);
-                        await TakeStashSnapshot(database, stash);
+                        await ParseStash(dbContext, stash);
+                        await TakeStashSnapshot(dbContext, stash);
                         Log("Icons.Material.Filled.HourglassBottom", "Color.Info", $"[{stash.Name}] Updated.");
                     }
 
@@ -104,7 +103,7 @@ namespace Sidekick.Modules.Wealth
                         break;
                     }
 
-                    await TakeFullSnapshot(database);
+                    await TakeFullSnapshot(dbContext);
                     await Task.Delay(TimeSpan.FromSeconds(1));
 
                     var delay = (lastRun + TimeSpan.FromMinutes(10)) - DateTimeOffset.Now;

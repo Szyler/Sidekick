@@ -9,7 +9,7 @@ using Sidekick.Common.Enums;
 namespace Sidekick.Common.Settings
 {
     public class SettingsService(
-        DbContextOptions<SidekickDbContext> dbContextOptions,
+        ISidekickDatabaseFactory databaseFactory,
         ILogger<SettingsService> logger) : ISettingsService
     {
         public event Action? OnSettingsChanged;
@@ -29,7 +29,7 @@ namespace Sidekick.Common.Settings
 
         public async Task<bool> GetBool(string key)
         {
-            await using var dbContext = new SidekickDbContext(dbContextOptions);
+            await using var dbContext = await databaseFactory.Create();
             var dbSetting = await dbContext
                                   .Settings.Where(x => x.Key == key)
                                   .FirstOrDefaultAsync();
@@ -41,7 +41,7 @@ namespace Sidekick.Common.Settings
             var defaultProperty = typeof(DefaultSettings).GetProperty(key);
             if (defaultProperty == null)
             {
-                return default;
+                return false;
             }
 
             return (bool)(defaultProperty.GetValue(null) ?? false);
@@ -49,7 +49,7 @@ namespace Sidekick.Common.Settings
 
         public async Task<string?> GetString(string key)
         {
-            await using var dbContext = new SidekickDbContext(dbContextOptions);
+            await using var dbContext = await databaseFactory.Create();
             var dbSetting = await dbContext
                                   .Settings.Where(x => x.Key == key)
                                   .FirstOrDefaultAsync();
@@ -61,7 +61,7 @@ namespace Sidekick.Common.Settings
             var defaultProperty = typeof(DefaultSettings).GetProperty(key);
             if (defaultProperty == null)
             {
-                return default;
+                return null;
             }
 
             return (string?)(defaultProperty.GetValue(null) ?? null);
@@ -69,7 +69,7 @@ namespace Sidekick.Common.Settings
 
         public async Task<int> GetInt(string key)
         {
-            await using var dbContext = new SidekickDbContext(dbContextOptions);
+            await using var dbContext = await databaseFactory.Create();
             var dbSetting = await dbContext
                                   .Settings.Where(x => x.Key == key)
                                   .FirstOrDefaultAsync();
@@ -81,7 +81,7 @@ namespace Sidekick.Common.Settings
             var defaultProperty = typeof(DefaultSettings).GetProperty(key);
             if (defaultProperty == null)
             {
-                return default;
+                return 0;
             }
 
             return (int)(defaultProperty.GetValue(null) ?? 0);
@@ -89,7 +89,7 @@ namespace Sidekick.Common.Settings
 
         public async Task<DateTimeOffset?> GetDateTime(string key)
         {
-            await using var dbContext = new SidekickDbContext(dbContextOptions);
+            await using var dbContext = await databaseFactory.Create();
             var dbSetting = await dbContext
                                   .Settings.Where(x => x.Key == key)
                                   .FirstOrDefaultAsync();
@@ -101,7 +101,7 @@ namespace Sidekick.Common.Settings
             var defaultProperty = typeof(DefaultSettings).GetProperty(key);
             if (defaultProperty == null)
             {
-                return default;
+                return null;
             }
 
             return (DateTimeOffset?)(defaultProperty.GetValue(null) ?? null);
@@ -109,7 +109,7 @@ namespace Sidekick.Common.Settings
 
         public async Task<TValue?> GetObject<TValue>(string key)
         {
-            await using var dbContext = new SidekickDbContext(dbContextOptions);
+            await using var dbContext = await databaseFactory.Create();
             var dbSetting = await dbContext
                                   .Settings.Where(x => x.Key == key)
                                   .FirstOrDefaultAsync();
@@ -145,7 +145,7 @@ namespace Sidekick.Common.Settings
         public async Task<TEnum?> GetEnum<TEnum>(string key)
             where TEnum : struct, Enum
         {
-            await using var dbContext = new SidekickDbContext(dbContextOptions);
+            await using var dbContext = await databaseFactory.Create();
             var dbSetting = await dbContext
                                   .Settings.Where(x => x.Key == key)
                                   .FirstOrDefaultAsync();
@@ -163,7 +163,7 @@ namespace Sidekick.Common.Settings
             var defaultProperty = typeof(DefaultSettings).GetProperty(key);
             if (defaultProperty == null)
             {
-                return default;
+                return null;
             }
 
             try
@@ -186,7 +186,7 @@ namespace Sidekick.Common.Settings
                 throw;
             }
 
-            return default;
+            return null;
         }
 
         public async Task Set(
@@ -205,7 +205,7 @@ namespace Sidekick.Common.Settings
                 }
             }
 
-            await using var dbContext = new SidekickDbContext(dbContextOptions);
+            await using var dbContext = await databaseFactory.Create();
             var dbSetting = await dbContext
                                   .Settings.Where(x => x.Key == key)
                                   .FirstOrDefaultAsync();

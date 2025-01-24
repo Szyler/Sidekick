@@ -67,7 +67,7 @@
 </CascadingValue>
 
 @implements IDisposable
-@inject DbContextOptions<SidekickDbContext> DbContextOptions
+@inject ISidekickDatabaseFactory DatabaseFactory
 @inject ISettingsService SettingsService
 @inject WealthParser WealthParser
 
@@ -137,8 +137,8 @@
                    ??
                    [
                    ];
-        await using var database = new SidekickDbContext(DbContextOptions);
-        StashTabs = await database
+        await using var dbContext = await DatabaseFactory.Create();
+        StashTabs = await dbContext
                           .WealthStashes.Where(x => tabs.Contains(x.Id))
                           .OrderByDescending(x => x.Total)
                           .ToListAsync();

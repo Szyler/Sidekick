@@ -42,7 +42,7 @@
 </div>
 
 @inject WealthParser WealthParser
-@inject DbContextOptions<SidekickDbContext> DbContextOptions
+@inject ISidekickDatabaseFactory DatabaseFactory
 @inject ISettingsService SettingsService
 @implements IDisposable
 @code {
@@ -76,14 +76,14 @@
     {
         MinimumTotal = await SettingsService.GetInt(SettingKeys.WealthItemTotalMinimum);
 
-        await using var database = new SidekickDbContext(DbContextOptions);
+        await using var dbContext = await DatabaseFactory.Create();
 
-        var stashIds = await database.WealthStashes
+        var stashIds = await dbContext.WealthStashes
             .Where(x => View.SelectedStashIds.Contains(x.Id))
             .Select(x => x.Id)
             .ToListAsync();
 
-        Items = await database.WealthItems
+        Items = await dbContext.WealthItems
             .Where(x => stashIds.Contains(x.StashId))
             .Where(x => x.Total > MinimumTotal)
             .GroupBy(x => x.Name)

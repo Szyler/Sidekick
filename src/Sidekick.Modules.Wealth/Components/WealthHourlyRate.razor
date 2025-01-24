@@ -12,7 +12,7 @@ else
 
 @using Microsoft.EntityFrameworkCore
 @using Sidekick.Common.Database
-@inject DbContextOptions<SidekickDbContext> DbContextOptions
+@inject ISidekickDatabaseFactory DatabaseFactory
 @inject WealthParser WealthParser
 @implements IDisposable
 
@@ -40,14 +40,14 @@ else
     private async Task LoadData()
     {
         var oneHourAgo = DateTimeOffset.Now.AddHours(-1);
-        await using var database = new SidekickDbContext(DbContextOptions);
+        await using var dbContext = await DatabaseFactory.Create();
 
-        var oneHourAgoSnapshot = await database
+        var oneHourAgoSnapshot = await dbContext
                                        .WealthFullSnapshots.Where(x => x.Date > oneHourAgo)
                                        .OrderBy(x => x.Date)
                                        .FirstOrDefaultAsync();
 
-        var latestSnapshot = await database
+        var latestSnapshot = await dbContext
                                    .WealthFullSnapshots.OrderByDescending(x => x.Date)
                                    .FirstOrDefaultAsync();
 

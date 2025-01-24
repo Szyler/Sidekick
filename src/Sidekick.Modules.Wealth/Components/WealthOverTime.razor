@@ -46,7 +46,7 @@
     </div>
 </div>
 
-@inject DbContextOptions<SidekickDbContext> DbContextOptions
+@inject ISidekickDatabaseFactory DatabaseFactory
 @inject ISettingsService SettingsService
 @inject WealthParser WealthParser
 @implements IDisposable
@@ -163,15 +163,15 @@
     {
         Series.Clear();
 
-        await using var database = new SidekickDbContext(DbContextOptions);
-        var stashes = await database
+        await using var dbContext = await DatabaseFactory.Create();
+        var stashes = await dbContext
                             .WealthStashes.Where(x => View.SelectedStashIds.Contains(x.Id))
                             .ToListAsync();
         var stashIds = stashes
                        .Select(x => x.Id)
                        .ToList();
 
-        var stashSnapshots = await database
+        var stashSnapshots = await dbContext
                                    .WealthStashSnapshots.Where(x => stashIds.Contains(x.StashId))
                                    .OrderByDescending(x => x.Total)
                                    .ToListAsync();
