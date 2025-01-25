@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using ApexCharts;
 using Sidekick.Apis.GitHub;
 using Sidekick.Apis.Poe;
@@ -22,6 +23,20 @@ using Sidekick.Modules.Wealth;
 using Sidekick.Web;
 
 var builder = WebApplication.CreateBuilder(args);
+
+#region Certificates
+// Load the local certificate
+var certificate = new X509Certificate2(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wwwroot/certificates/localhost.pfx"));
+
+// Configure Kestrel to use the certificate for HTTPS
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ConfigureHttpsDefaults(httpsOptions =>
+    {
+        httpsOptions.ServerCertificate = certificate;
+    });
+});
+#endregion Certificate
 
 #region Services
 
