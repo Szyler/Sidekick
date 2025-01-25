@@ -37,10 +37,6 @@ public static class StartupExtensions
         services.AddTransient<PoeTradeHandler>();
 
         services.AddHttpClient(ClientNames.TradeClient)
-            .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
-            {
-                UseCookies = true,
-            })
             .AddHttpMessageHandler<PoeTradeHandler>();
 
         services.AddHttpClient(ClientNames.PoeClient)
